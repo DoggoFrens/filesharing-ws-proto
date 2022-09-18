@@ -1,0 +1,23 @@
+{
+  "name": "@doggofrens/filesharing-ws-proto",
+  "version": "0.1.0",
+  "description": "Protocol for 2-way WebSocket communication",
+  "main": "src/main.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare" : "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoggoFrens/filesharing-ws-proto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DoggoFrens/filesharing-ws-proto/issues"
+  },
+  "homepage": "https://github.com/DoggoFrens/filesharing-ws-proto#readme",
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  }
+}
