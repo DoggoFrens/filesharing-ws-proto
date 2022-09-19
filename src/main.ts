@@ -103,7 +103,7 @@ namespace Protocol {
          * @returns The parsed message.
          */
         static fromUint8Array(byteArray: Uint8Array, expectedChunkSize?: number): ChunkMessage | null {
-            if (expectedChunkSize && byteArray.byteLength != 1 + expectedChunkSize) {
+            if (expectedChunkSize && byteArray.byteLength != 2 + expectedChunkSize) {
                 return null;
             }
 
@@ -119,25 +119,14 @@ namespace Protocol {
         toUint8Array(): Uint8Array {
             const byteArray = new Uint8Array(1 + this.chunkBytes.byteLength);
             byteArray[0] = this.type;
-            byteArray.set(this.chunkBytes, 1);
+            byteArray[1] = this.chunkNumber;
+            byteArray.set(this.chunkBytes, 2);
 
             return byteArray;
         }
 
     }
 
-    function parseMessage(byteArray: Uint8Array, expectedChunkSize?: number): Message | null {
-        const type = byteArray[0];
-
-        switch (type) {
-            case MessageType.Ack:
-                return new AckMessage();
-            case MessageType.Chunk:
-                return ChunkMessage.fromUint8Array(byteArray, expectedChunkSize);
-            default:
-                return null;
-        }
-    }
 
 }
 

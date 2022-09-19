@@ -1,8 +1,9 @@
 {
   "name": "@doggofrens/filesharing-ws-proto",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Protocol for 2-way WebSocket communication",
-  "main": "src/main.ts",
+  "main": "lib/main.js",
+  "types": "lib/main.d.ts",
   "scripts": {
     "build": "tsc",
     "prepare" : "npm run build"
