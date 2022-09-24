@@ -1,6 +1,6 @@
 {
   "name": "@doggofrens/filesharing-ws-proto",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Protocol for 2-way WebSocket communication",
   "main": "lib/main.js",
   "types": "lib/main.d.ts",
@@ -28,7 +28,6 @@
     "typescript": "^4.8.3"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
     "npm": "^8.19.2"
   }
 }
