@@ -6,7 +6,6 @@ import { Message } from "./Message";
  *
  * @extends Message
  */
-
 export class FileChunkMessage extends Message {
 
     /**

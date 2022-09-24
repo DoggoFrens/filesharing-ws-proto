@@ -42,16 +42,18 @@ export class FileInfoMessage extends Message {
      */
     static fromUint8Array(byteArray: Uint8Array): FileInfoMessage | null {
         // Minimum size: 1 (type) + 4 (size) + 1 (name with at least one byte)
-        if (byteArray.length < 6) {
+        if (byteArray.length <= 5) {
             return null;
         }
 
         //TODO: Return null if size is too big
+        
         if (byteArray[0] !== MessageType.FileInfo) {
             return null;
         }
 
-        const size: number = new Uint32Array(byteArray.slice(1, 5).buffer)[0];
+        // Size is received as a 32-bit unsigned integer in little endian
+        const size: number = new DataView(byteArray.slice(1, 5).buffer).getUint32(0, true);
         const name: string = Buffer.from(byteArray.slice(5)).toString('utf8');
 
         return new FileInfoMessage(name, size);
@@ -62,7 +64,10 @@ export class FileInfoMessage extends Message {
      */
     toUint8Array(): Uint8Array {
         const nameBytes: Uint8Array = Buffer.from(this.name, 'utf8');
-        const sizeBytes: Uint8Array = new Uint8Array(new Uint32Array([this.size]).buffer);
+        // Size is sent as a 32-bit unsigned integer in little endian
+        const sizeDataView = new DataView(new ArrayBuffer(4));
+        sizeDataView.setUint32(0, this.size, true);
+        const sizeBytes: Uint8Array = new Uint8Array(sizeDataView.buffer);
 
         const byteArray = new Uint8Array(1 + 4 + nameBytes.byteLength);
         byteArray[0] = this.type;

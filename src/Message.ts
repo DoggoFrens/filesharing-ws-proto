@@ -3,7 +3,6 @@ import { MessageType } from './MessageType';
 /**
  * An abstract class that represents a WebSocket message.
  */
-
 export abstract class Message {
 
     /**

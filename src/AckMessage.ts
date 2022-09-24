@@ -6,7 +6,6 @@ import { Message } from "./Message";
  *
  * @extends Message
  */
-
 export class AckMessage extends Message {
 
     constructor() {
