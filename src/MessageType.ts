@@ -10,6 +10,5 @@ export enum MessageType {
     FileInfo = 1,
     FileChunk = 2,
 
-    FileInfoRequest = 51,
-    UploadStartReq = 52,
+    FileInfoRequest = 51
 }
