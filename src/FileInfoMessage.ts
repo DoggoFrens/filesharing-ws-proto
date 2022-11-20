@@ -1,9 +1,10 @@
+import { Buffer } from 'buffer/';
 import { MessageType } from './MessageType';
 import { Message } from "./Message";
 
 /**
  * A message that contains information about a file.
- * 
+ *
  * @extends Message
  */
 export class FileInfoMessage extends Message {
@@ -47,7 +48,7 @@ export class FileInfoMessage extends Message {
         }
 
         //TODO: Return null if size is too big
-        
+
         if (byteArray[0] !== MessageType.FileInfo) {
             return null;
         }
