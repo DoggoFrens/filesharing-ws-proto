@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer/';
 import { MessageType } from './MessageType';
 import { Message } from "./Message";
 
