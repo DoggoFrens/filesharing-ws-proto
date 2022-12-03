@@ -6,7 +6,7 @@ import { Message } from "./Message";
  *
  * @extends Message
  */
-export class FileChunkMessage extends Message {
+export class ChunkMessage extends Message {
 
     /**
      * The number of the chunk, where 0 is the first chunk.
@@ -29,31 +29,31 @@ export class FileChunkMessage extends Message {
      * @param chunkBytes The chunk data.
      */
     constructor(chunkNumber: number, chunkBytes: Uint8Array) {
-        super(MessageType.FileChunk);
+        super(MessageType.Chunk);
         this.chunkNumber = chunkNumber;
         this.chunkBytes = chunkBytes;
     }
 
     /**
-     * Parses a FileChunkMessage from a Uint8Array.
+     * Parses a ChunkMessage from a Uint8Array.
      *
      * @param byteArray The byte array to parse.
      * @param expectedChunkSize The expected size of the chunk, in bytes.
-     * @returns The parsed FileChunkMessage, or null if the byte array is invalid.
+     * @returns The parsed ChunkMessage, or null if the byte array is invalid.
      */
-    static fromUint8Array(byteArray: Uint8Array, expectedChunkSize?: number): FileChunkMessage | null {
+    static fromUint8Array(byteArray: Uint8Array, expectedChunkSize?: number): ChunkMessage | null {
         if (expectedChunkSize && byteArray.byteLength != 2 + expectedChunkSize) {
             return null;
         }
 
-        if (byteArray[0] !== MessageType.FileChunk) {
+        if (byteArray[0] !== MessageType.Chunk) {
             return null;
         }
 
         const chunkNumber = byteArray[1];
         const chunkBytes = byteArray.slice(2);
 
-        return new FileChunkMessage(chunkNumber, chunkBytes);
+        return new ChunkMessage(chunkNumber, chunkBytes);
     }
 
     /**
