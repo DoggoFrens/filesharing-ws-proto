@@ -10,7 +10,7 @@ Messages are sequences of bytes. Strings are encoded in `UTF-8`, numbers are sto
   Type: `MessageType.Ack`
   - `Client <-> Server`
 
-  Used as a geneirc ACK, anywhere it is required.
+  Used as a generic ACK, anywhere it is required.
 
 - `InfoRequestMessage`  
   Type: `MessageType.InfoRequest`
