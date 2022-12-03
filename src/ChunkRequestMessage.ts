@@ -31,7 +31,7 @@ import { MessageType } from "./MessageType";
      * @returns The parsed ChunkRequestMessage, or null if the byte array is invalid.
      */
     static fromUint8Array(byteArray: Uint8Array): ChunkRequestMessage | null {
-        if (byteArray.length <= 2) {
+        if (byteArray.length < 2) {
             return null;
         }
 
