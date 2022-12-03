@@ -7,7 +7,7 @@ import { Message } from "./Message";
  *
  * @extends Message
  */
-export class FileInfoMessage extends Message {
+export class InfoMessage extends Message {
 
     /**
      * The name of the file.
@@ -30,26 +30,26 @@ export class FileInfoMessage extends Message {
      * @param size The size of the file in bytes.
      */
     constructor(name: string, size: number) {
-        super(MessageType.FileInfo);
+        super(MessageType.Info);
         this.name = name;
         this.size = size;
     }
 
     /**
-     * Parses a FileInfoMessage from a Uint8Array.
+     * Parses a InfoMessage from a Uint8Array.
      *
      * @param byteArray The byte array to parse.
-     * @returns The parsed FileInfoMessage, or null if the byte array is invalid.
+     * @returns The parsed InfoMessage, or null if the byte array is invalid.
      */
-    static fromUint8Array(byteArray: Uint8Array): FileInfoMessage | null {
+    static fromUint8Array(byteArray: Uint8Array): InfoMessage | null {
         // Minimum size: 1 (type) + 4 (size) + 1 (name with at least one byte)
-        if (byteArray.length <= 5) {
+        if (byteArray.length < 6) {
             return null;
         }
 
         //TODO: Return null if size is too big
 
-        if (byteArray[0] !== MessageType.FileInfo) {
+        if (byteArray[0] !== MessageType.Info) {
             return null;
         }
 
@@ -57,7 +57,7 @@ export class FileInfoMessage extends Message {
         const size: number = new DataView(byteArray.slice(1, 5).buffer).getUint32(0, true);
         const name: string = Buffer.from(byteArray.slice(5)).toString('utf8');
 
-        return new FileInfoMessage(name, size);
+        return new InfoMessage(name, size);
     }
 
     /**

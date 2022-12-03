@@ -8,7 +8,7 @@ import { Message } from "./Message";
  *
  * @extends Message
  */
-export class FileInfoRequestMessage extends Message {
+export class InfoRequestMessage extends Message {
 
     /**
      * The session ID.
@@ -21,28 +21,28 @@ export class FileInfoRequestMessage extends Message {
      * @param id The session ID.
      */
     constructor(id: string) {
-        super(MessageType.FileInfoRequest);
+        super(MessageType.InfoRequest);
         this.id = id;
     }
 
     /**
-     * Parses a FileInfoRequestMessage from a Uint8Array.
+     * Parses a InfoRequestMessage from a Uint8Array.
      *
      * @param byteArray The byte array to parse.
-     * @returns The parsed FileInfoRequestMessage, or null if the byte array is invalid.
+     * @returns The parsed InfoRequestMessage, or null if the byte array is invalid.
      */
-    static fromUint8Array(byteArray: Uint8Array): FileInfoRequestMessage | null {
+    static fromUint8Array(byteArray: Uint8Array): InfoRequestMessage | null {
         if (byteArray.length <= 1) {
             return null;
         }
 
-        if (byteArray[0] !== MessageType.FileInfoRequest) {
+        if (byteArray[0] !== MessageType.InfoRequest) {
             return null;
         }
 
         const id = Buffer.from(byteArray.slice(1)).toString('utf8');
 
-        return new FileInfoRequestMessage(id);
+        return new InfoRequestMessage(id);
     }
 
     /**
